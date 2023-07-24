@@ -1,8 +1,16 @@
-import { PropsWithChildren } from 'react'
+import { HTMLAttributes } from 'react'
 
-export function Tag({ children }: PropsWithChildren) {
+import { twMerge } from 'tailwind-merge'
+
+export function Tag({ children, className = '', ...props }: HTMLAttributes<HTMLElement>) {
   return (
-    <div className="inline-flex h-10 w-[101px] items-center justify-center rounded bg-primary-100 px-4 py-1 text-base text-primary-500">
+    <div
+      className={twMerge(
+        'inline-flex max-h-10 w-max items-center justify-center rounded bg-primary-100 px-4 py-1 text-base text-primary-500',
+        className,
+      )}
+      {...props}
+    >
       {children}
     </div>
   )

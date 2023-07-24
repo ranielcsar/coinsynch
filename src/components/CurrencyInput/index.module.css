@@ -1,0 +1,20 @@
+.number_input {
+  /*for absolutely positioning spinners*/
+  position: relative;
+}
+
+.number_input::-webkit-inner-spin-button,
+.number_input::-webkit-outer-spin-button {
+  opacity: 1;
+}
+
+.number_input::-webkit-outer-spin-button,
+.number_input::-webkit-inner-spin-button {
+  -webkit-appearance: inner-spin-button !important;
+  width: 35px;
+  position: absolute;
+  background: none;
+  top: 0;
+  right: 0;
+  height: 100%;
+}
