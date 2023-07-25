@@ -23,8 +23,8 @@ export function SignIn({ isOpen, onClose }: SignInProps) {
       </Modal.Body>
 
       <Modal.Footer className="group flex flex-col items-center gap-5 text-default_text">
-        <Button className="w-full">Sign in</Button>
-        <span className="flex cursor-pointer justify-center gap-1 text-center text-sm group-hover:border-b">
+        <Button className="w-full xl:py-6">Sign in</Button>
+        <span className="flex cursor-pointer flex-wrap justify-center gap-1 text-center text-sm group-hover:border-b">
           Don’t have an account? <strong>Sign up to</strong>{' '}
           <CoinSync className="text-sm" />
         </span>
