@@ -1,7 +1,13 @@
+import { useContext } from 'react'
+
 import { CoinSyncLogo } from '@/assets/icons'
 import { Button, CoinCarousel } from '@/components'
 
+import { landingContext } from '../../context'
+
 export function DesktopHeader() {
+  const { setSignUpModalOpen, setSignInModalOpen } = useContext(landingContext)
+
   return (
     <header className="pt-5 shadow-md">
       <section className="m-auto grid max-w-[90rem] grid-cols-[1fr,1fr,1fr,25rem,1.2fr] items-center gap-10 px-16 pb-5">
@@ -17,8 +23,8 @@ export function DesktopHeader() {
         </div>
 
         <div className="col-[5] flex justify-end gap-5">
-          <button>Sign in</button>
-          <Button>Sing up</Button>
+          <button onClick={() => setSignInModalOpen(true)}>Sign in</button>
+          <Button onClick={() => setSignUpModalOpen(true)}>Sing up</Button>
         </div>
       </section>
     </header>
