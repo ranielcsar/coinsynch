@@ -9,10 +9,11 @@ export function MobileCards() {
       renderItem: <Card />,
     })),
     withLoop: true,
+    itemsPerSlide: 1.12,
   })
 
   return (
-    <section className={'custom_shadow my-8 p-5'}>
+    <section className="my-8 p-5">
       <hgroup>
         <h6 className="font-bold text-primary-500">Lorem ipsum</h6>
         <h4 className="font-bold">Lorem ipsum</h4>

@@ -1,6 +1,13 @@
-export function Card() {
+import { twMerge } from 'tailwind-merge'
+
+export function Card({ className = '' }: { className?: string }) {
   return (
-    <div className="flex h-72 w-64 flex-col gap-5 rounded-md border border-secondary-200 p-5 shadow-md">
+    <div
+      className={twMerge(
+        'flex h-72 w-[95%] flex-col gap-5 rounded-md border border-secondary-100 bg-white p-5 shadow-md md:shadow-lg',
+        className,
+      )}
+    >
       <div className="h-12 w-12 rounded-full bg-secondary-300" />
 
       <hgroup>
