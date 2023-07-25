@@ -30,8 +30,8 @@ export function WaveSvg(props: HTMLAttributes<HTMLOrSVGElement>) {
           y2="157"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#FBAB34" stop-opacity="0.2" />
-          <stop offset="1" stop-color="#FBAB34" stop-opacity="0" />
+          <stop stopColor="#FBAB34" stopOpacity="0.2" />
+          <stop offset="1" stopColor="#FBAB34" stopOpacity="0" />
         </linearGradient>
         <linearGradient
           id="paint1_linear_1_3779"
@@ -41,8 +41,8 @@ export function WaveSvg(props: HTMLAttributes<HTMLOrSVGElement>) {
           y2="178.347"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#FBAB34" stop-opacity="0.2" />
-          <stop offset="1" stop-color="#FBAB34" stop-opacity="0" />
+          <stop stopColor="#FBAB34" stopOpacity="0.2" />
+          <stop offset="1" stopColor="#FBAB34" stopOpacity="0" />
         </linearGradient>
         <linearGradient
           id="paint2_linear_1_3779"
@@ -52,8 +52,8 @@ export function WaveSvg(props: HTMLAttributes<HTMLOrSVGElement>) {
           y2="145.347"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#FBAB34" stop-opacity="0.2" />
-          <stop offset="1" stop-color="#FBAB34" stop-opacity="0" />
+          <stop stopColor="#FBAB34" stopOpacity="0.2" />
+          <stop offset="1" stopColor="#FBAB34" stopOpacity="0" />
         </linearGradient>
       </defs>
     </svg>
