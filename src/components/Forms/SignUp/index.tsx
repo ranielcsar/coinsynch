@@ -14,7 +14,7 @@ export function SignUp({ isOpen, onClose }: SignUpProps) {
         Sign up to <CoinSync />
       </Modal.Title>
 
-      <Modal.Body className="my-6 grid grid-rows-5 gap-6">
+      <Modal.Body className="my-6 mb-12 grid auto-rows-[3.5rem] gap-5">
         <TextInput>
           <TextInput.LeftIcon icon={PersonIcon} />
           <TextInput.Input placeholder="Name" type="text" />
@@ -40,8 +40,8 @@ export function SignUp({ isOpen, onClose }: SignUpProps) {
       </Modal.Body>
 
       <Modal.Footer className="flex flex-col items-center gap-5 text-default_text">
-        <Button className="w-full">Sign up</Button>
-        <span className="flex cursor-pointer justify-center gap-1 text-center text-sm hover:border-b">
+        <Button className="w-full xl:py-6 xl:text-lg">Sign up</Button>
+        <span className="flex cursor-pointer flex-wrap justify-center gap-1 text-center text-sm">
           Already have and account? <strong>Sign in to</strong>{' '}
           <CoinSync className="text-sm" />
         </span>
