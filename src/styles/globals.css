@@ -12,6 +12,10 @@
   @apply font-normal text-[--roboto];
 }
 
+button {
+  outline: none;
+}
+
 h1 {
   @apply text-5xl leading-[56px] tracking-[-1];
 }
