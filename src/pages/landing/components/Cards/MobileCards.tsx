@@ -1,13 +1,29 @@
 import { useSpringCarousel } from 'react-spring-carousel'
 
+import { BitconIcon, BusinessChartIcon, ComputerIcon, CurrencyIcon } from '@/assets/cards'
+
 import { Card } from './Card'
 
 export function MobileCards() {
   const { carouselFragment } = useSpringCarousel({
-    items: Array.from({ length: 4 }).map((item) => ({
-      id: item,
-      renderItem: <Card />,
-    })),
+    items: [
+      {
+        id: 'bitcoin',
+        renderItem: <Card icon={BitconIcon} />,
+      },
+      {
+        id: 'currency',
+        renderItem: <Card icon={CurrencyIcon} />,
+      },
+      {
+        id: 'business',
+        renderItem: <Card icon={BusinessChartIcon} />,
+      },
+      {
+        id: 'computer',
+        renderItem: <Card icon={ComputerIcon} />,
+      },
+    ],
     withLoop: true,
     itemsPerSlide: 1.12,
   })
