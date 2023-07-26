@@ -1,4 +1,4 @@
-import { createContext, Dispatch, PropsWithChildren } from 'react'
+import { createContext, Dispatch, PropsWithChildren, useContext } from 'react'
 
 type ContextProps = {
   signUpModalOpen: boolean
@@ -16,4 +16,8 @@ export function LandingContext({
   const Provider = landingContext.Provider
 
   return <Provider value={value}>{children}</Provider>
+}
+
+export function useLandingContext() {
+  return useContext(landingContext)
 }
