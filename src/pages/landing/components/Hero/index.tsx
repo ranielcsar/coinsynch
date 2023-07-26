@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import Image from 'next/image'
 import { useSpringCarousel } from 'react-spring-carousel'
@@ -11,15 +11,15 @@ import Banner3 from '@/assets/images/banner-image-3.svg'
 import { Button, Tag } from '@/components'
 import { useMediaQuery } from '@/hooks/useMediaQuery'
 
-import { landingContext } from '../../context'
+import { useModal } from '../../hooks/useModal'
 
 export function Hero() {
-  const { setSignUpModalOpen } = useContext(landingContext)
+  const { openSignUp } = useModal()
   const isDesktop = useMediaQuery('(min-width: 1280px)')
 
   return (
     <>
-      <section className="relative mt-11 flex max-w-screen-xl flex-col overflow-hidden p-5 md:m-auto md:flex-row md:items-center xl:gap-20">
+      <section className="relative flex max-w-screen-xl flex-col overflow-hidden p-5 pt-16 md:m-auto md:flex-row md:items-center xl:gap-20">
         <div className="relative flex flex-[1.2] flex-col md:px-5 xl:flex-[0.8]">
           <header className="text-center text-lg font-bold leading-8 text-primary-500 md:text-left md:text-4xl">
             Lorem ipsum dolor sit amet, consectetur
@@ -32,7 +32,7 @@ export function Hero() {
 
           <Button
             className="mx-auto my-4 mt-8 md:mx-0 xl:w-[15rem] xl:py-6 xl:font-bold"
-            onClick={() => setSignUpModalOpen(true)}
+            onClick={openSignUp}
           >
             SIGN UP NOW <RightArrowIcon />
           </Button>
@@ -71,8 +71,8 @@ function ImagesCarousel() {
   const [activeItem, setActiveItem] = useState(bannerImages[0].id)
   const isDesktop = useMediaQuery('(min-width: 1280px)')
 
-  const { carouselFragment, useListenToCustomEvent /* slideToNextItem */ } =
-    useSpringCarousel({
+  const { carouselFragment, useListenToCustomEvent, slideToNextItem } = useSpringCarousel(
+    {
       items: bannerImages.map((item) => ({
         id: item.id,
         renderItem: (
@@ -87,23 +87,14 @@ function ImagesCarousel() {
       })),
       withLoop: true,
       itemsPerSlide: isDesktop ? 1.3 : 1.2,
-    })
+    },
+  )
 
   useListenToCustomEvent((event: any) => {
     if (event.eventName === 'onSlideStartChange') {
       setActiveItem(event.nextItem.id)
     }
   })
-
-  useEffect(() => {
-    const handleScroll = (event: Event) => {
-      // slideToNextItem()
-    }
-
-    window.addEventListener('scroll', handleScroll)
-
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
 
   return (
     <div className="flex-1 select-none overflow-hidden sm:hidden md:block">
