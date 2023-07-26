@@ -1,13 +1,12 @@
-import { useContext } from 'react'
-
+import { BitconIcon, BusinessChartIcon, ComputerIcon, CurrencyIcon } from '@/assets/cards'
 import { Button } from '@/components'
 
-import { landingContext } from '../../context'
+import { useModal } from '../../hooks/useModal'
 
 import { Card } from './Card'
 
 export function CardsGrid() {
-  const { setSignUpModalOpen } = useContext(landingContext)
+  const { openSignUp } = useModal()
 
   return (
     <section className="m-auto mb-24 w-[85%] max-w-screen-xl xl:flex xl:w-full xl:gap-16">
@@ -23,17 +22,17 @@ export function CardsGrid() {
         </p>
 
         <div className="hidden xl:mt-8 xl:block">
-          <Button className="w-[12rem] py-6" onClick={() => setSignUpModalOpen(true)}>
+          <Button className="w-[12rem] py-6" onClick={openSignUp}>
             Sign up now
           </Button>
         </div>
       </div>
 
-      <div className="mt-10 grid grid-cols-[3rem,repeat(7,1fr),3rem] grid-rows-2 gap-5 xl:w-full xl:flex-[1.5]">
-        <Card className="col-[1/5] row-[1]" />
-        <Card className="col-span-4 row-[1]" />
-        <Card className="col-[2/6] row-[2]" />
-        <Card className="col-span-4 row-[2]" />
+      <div className="mt-10 grid grid-cols-[5%,repeat(8,1fr),5%] grid-rows-2 gap-6 xl:w-full xl:flex-[1.5] xl:gap-8">
+        <Card icon={BitconIcon} className="col-[1/5] row-[1]" />
+        <Card icon={CurrencyIcon} className="col-span-4 row-[1]" />
+        <Card icon={BusinessChartIcon} className="col-[2/6] row-[2]" />
+        <Card icon={ComputerIcon} className="col-span-4 row-[2]" />
       </div>
     </section>
   )
