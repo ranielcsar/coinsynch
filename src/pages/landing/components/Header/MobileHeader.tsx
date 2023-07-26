@@ -1,14 +1,13 @@
 import { useState } from 'react'
-import { useContext } from 'react'
 
-import { CoinSyncLogo, MenuIcon } from '@/assets/icons'
-import { Button, CoinCarousel, Drawer } from '@/components'
+import { CoinSynchLogo, MenuIcon } from '@/assets/icons'
+import { Button, CryptosCarousel, Drawer } from '@/components'
 
-import { landingContext } from '../../context'
+import { useModal } from '../../hooks/useModal'
 
 export function MobileHeader() {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false)
-  const { setSignUpModalOpen, setSignInModalOpen } = useContext(landingContext)
+  const { openSignIn, openSignUp } = useModal()
 
   const closeDrawer = () => setIsDrawerOpen(false)
   const openDrawer = () => setIsDrawerOpen(true)
@@ -16,7 +15,7 @@ export function MobileHeader() {
   return (
     <header className="flex flex-col pt-5 shadow-md">
       <section className="flex items-center justify-between px-4 pb-5">
-        <CoinSyncLogo />
+        <CoinSynchLogo />
 
         <button onClick={openDrawer}>
           <MenuIcon />
@@ -28,14 +27,14 @@ export function MobileHeader() {
 
             <a href="#top-cryptos">Top Cryptos</a>
 
-            <button onClick={() => setSignInModalOpen(true)}>Sign in</button>
+            <button onClick={openSignIn}>Sign in</button>
 
-            <Button className="w-full" onClick={() => setSignUpModalOpen(true)}>
+            <Button className="w-full" onClick={openSignUp}>
               Sing up
             </Button>
 
             <span className="absolute bottom-3">
-              <CoinSyncLogo />
+              <CoinSynchLogo />
             </span>
           </Drawer.Content>
         </Drawer>
@@ -43,7 +42,7 @@ export function MobileHeader() {
 
       <div className="w-full border-t-[0.1rem] border-t-secondary-200" />
 
-      <CoinCarousel />
+      <CryptosCarousel />
     </header>
   )
 }
