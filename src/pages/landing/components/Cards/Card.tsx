@@ -1,14 +1,21 @@
+import { ElementType } from 'react'
+
 import { twMerge } from 'tailwind-merge'
 
-export function Card({ className = '' }: { className?: string }) {
+type CardProps = {
+  icon: ElementType
+  className?: string
+}
+
+export function Card({ className = '', icon: Icon }: CardProps) {
   return (
     <div
       className={twMerge(
-        'flex h-72 w-[95%] flex-col gap-5 rounded-md border border-secondary-100 bg-white p-5 shadow-md md:shadow-lg',
+        'flex h-72 w-[95%] flex-col gap-5 rounded-md border border-secondary-100 bg-white p-5 shadow-md md:w-full md:shadow-lg',
         className,
       )}
     >
-      <div className="h-12 w-12 rounded-full bg-secondary-300" />
+      <Icon />
 
       <hgroup>
         <h6 className="font-bold text-primary-500">For your company</h6>
