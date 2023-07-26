@@ -1,6 +1,5 @@
 import { useState } from 'react'
 
-import { CoinSyncLogo } from '@/assets/icons'
 import { SignIn, SignUp } from '@/components/Forms'
 import { useMediaQuery } from '@/hooks/useMediaQuery'
 
@@ -47,19 +46,7 @@ export function LandingPage() {
         </div>
 
         <Subscribe />
-
-        <Footer />
       </main>
     </LandingContext>
-  )
-}
-
-function Footer() {
-  return (
-    <footer className="flex w-full max-w-screen-xl justify-center bg-white py-5 md:m-auto md:justify-between md:px-10">
-      <p className="hidden md:block">Copyright © 2022 - All rights reserved</p>
-
-      <CoinSyncLogo />
-    </footer>
   )
 }
