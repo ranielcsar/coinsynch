@@ -1,5 +1,5 @@
 import { EmailIcon } from '@/assets/icons'
-import { Button, CoinSync, Modal, PasswordInput, TextInput } from '@/components'
+import { Button, CoinSynch, Modal, PasswordInput, TextInput } from '@/components'
 
 type SignInProps = {
   isOpen: boolean
@@ -10,7 +10,7 @@ export function SignIn({ isOpen, onClose }: SignInProps) {
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <Modal.Title className="flex justify-center gap-1 text-center text-2xl">
-        Sign in to <CoinSync />
+        Sign in to <CoinSynch />
       </Modal.Title>
 
       <Modal.Body className="my-6 grid grid-rows-2 gap-6">
@@ -26,7 +26,7 @@ export function SignIn({ isOpen, onClose }: SignInProps) {
         <Button className="w-full xl:py-6">Sign in</Button>
         <span className="flex cursor-pointer flex-wrap justify-center gap-1 text-center text-sm group-hover:border-b">
           Don’t have an account? <strong>Sign up to</strong>{' '}
-          <CoinSync className="text-sm" />
+          <CoinSynch className="text-sm" />
         </span>
       </Modal.Footer>
     </Modal>

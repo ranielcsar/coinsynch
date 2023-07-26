@@ -1,5 +1,5 @@
 import { EmailIcon, PersonIcon } from '@/assets/icons'
-import { Button, CoinSync, Modal, PasswordInput, TextInput } from '@/components'
+import { Button, CoinSynch, Modal, PasswordInput, TextInput } from '@/components'
 import { Checkbox } from '@/components/Checkbox'
 
 type SignUpProps = {
@@ -11,10 +11,10 @@ export function SignUp({ isOpen, onClose }: SignUpProps) {
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <Modal.Title className="flex justify-center gap-1 text-center text-2xl">
-        Sign up to <CoinSync />
+        Sign up to <CoinSynch />
       </Modal.Title>
 
-      <Modal.Body className="my-6 mb-12 grid auto-rows-[3.5rem] gap-5">
+      <Modal.Body className="my-6 mb-12 grid auto-rows-[3.5rem] gap-5 md:mb-6">
         <TextInput>
           <TextInput.LeftIcon icon={PersonIcon} />
           <TextInput.Input placeholder="Name" type="text" />
@@ -40,10 +40,10 @@ export function SignUp({ isOpen, onClose }: SignUpProps) {
       </Modal.Body>
 
       <Modal.Footer className="flex flex-col items-center gap-5 text-default_text">
-        <Button className="w-full xl:py-6 xl:text-lg">Sign up</Button>
-        <span className="flex cursor-pointer flex-wrap justify-center gap-1 text-center text-sm">
+        <Button className="w-full py-6 md:text-lg">Sign up</Button>
+        <span className="flex cursor-pointer flex-wrap justify-center gap-1 text-center text-sm xl:text-[1rem]">
           Already have and account? <strong>Sign in to</strong>{' '}
-          <CoinSync className="text-sm" />
+          <CoinSynch className="text-sm xl:text-[1rem]" />
         </span>
       </Modal.Footer>
     </Modal>
