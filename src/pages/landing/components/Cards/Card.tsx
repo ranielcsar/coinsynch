@@ -9,13 +9,15 @@ type CardProps = {
 
 export function Card({ className = '', icon: Icon }: CardProps) {
   return (
-    <div
+    <article
       className={twMerge(
         'flex h-72 w-[95%] flex-col gap-5 rounded-md border border-secondary-100 bg-white p-5 shadow-md md:w-full md:shadow-lg',
         className,
       )}
     >
-      <Icon />
+      <div className="h-16 w-max self-start">
+        <Icon />
+      </div>
 
       <hgroup>
         <h6 className="font-bold text-primary-500">For your company</h6>
@@ -23,6 +25,6 @@ export function Card({ className = '', icon: Icon }: CardProps) {
       </hgroup>
 
       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam</p>
-    </div>
+    </article>
   )
 }

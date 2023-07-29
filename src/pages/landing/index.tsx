@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
 import { SignIn, SignUp } from '@/components/Forms'
-import { useMediaQuery } from '@/hooks/useMediaQuery'
+import { useBreakpoints } from '@/hooks/useBreakpoints'
 
 import { Cards } from './components/Cards'
 import { Header } from './components/Header'
@@ -14,7 +14,7 @@ export function LandingPage() {
   const [signUpModalOpen, setSignUpModalOpen] = useState(false)
   const [signInModalOpen, setSignInModalOpen] = useState(false)
 
-  const isMobile = useMediaQuery('(min-width: 320px) and (max-width: 760px)')
+  const { isMobile } = useBreakpoints()
 
   const contextValue = {
     signInModalOpen,

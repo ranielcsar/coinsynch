@@ -1,25 +1,33 @@
-import { InputHTMLAttributes, useState } from 'react'
+import React, { forwardRef, InputHTMLAttributes, Ref, useState } from 'react'
 
 import { ClosedEyeIcon, LockIcon, OpenedEyeIcon } from '@/assets/icons'
-import { TextInput } from '@/components'
 
-export function PasswordInput(props: InputHTMLAttributes<HTMLInputElement>) {
-  const [inputType, setInputType] = useState('password')
+import { TextInput } from '..'
 
-  const handleInputTypeChange = () => {
-    setInputType((type) => (type === 'password' ? 'text' : 'password'))
-  }
+interface PasswordInputProps extends InputHTMLAttributes<HTMLInputElement> {}
 
-  return (
-    <TextInput>
-      <TextInput.LeftIcon icon={LockIcon} />
-      <TextInput.Input type={inputType} placeholder="Password" {...props} />
-      <button
-        onClick={handleInputTypeChange}
-        className="pr-4 text-secondary-400 outline-none"
-      >
-        {inputType === 'password' ? <OpenedEyeIcon /> : <ClosedEyeIcon />}
-      </button>
-    </TextInput>
-  )
-}
+// eslint-disable-next-line react/display-name
+export const PasswordInput = forwardRef(
+  (props: PasswordInputProps, ref: Ref<HTMLInputElement>) => {
+    const [inputType, setInputType] = useState('password')
+
+    const handleInputTypeChange = () => {
+      setInputType((type) => (type === 'password' ? 'text' : 'password'))
+    }
+
+    return (
+      <TextInput>
+        <TextInput.LeftIcon icon={LockIcon} />
+        <TextInput.Input type={inputType} placeholder="Password" ref={ref} {...props} />
+        <button
+          onClick={handleInputTypeChange}
+          className="pr-4 text-secondary-400 outline-none"
+        >
+          <div className="h-5 w-5">
+            {inputType === 'password' ? <OpenedEyeIcon /> : <ClosedEyeIcon />}
+          </div>
+        </button>
+      </TextInput>
+    )
+  },
+)

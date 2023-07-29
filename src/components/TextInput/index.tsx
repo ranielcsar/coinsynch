@@ -1,4 +1,11 @@
-import { ElementType, HTMLAttributes, InputHTMLAttributes } from 'react'
+import {
+  DetailedHTMLProps,
+  ElementType,
+  forwardRef,
+  HTMLAttributes,
+  InputHTMLAttributes,
+  Ref,
+} from 'react'
 
 import { twMerge } from 'tailwind-merge'
 
@@ -20,15 +27,22 @@ export function TextInput({
   )
 }
 
-function Input(props: InputHTMLAttributes<HTMLInputElement>) {
-  return (
-    <input
-      type="text"
-      className="h-full w-full cursor-text px-3 py-4 text-base outline-none"
-      {...props}
-    />
-  )
-}
+// eslint-disable-next-line react/display-name
+const Input = forwardRef(
+  (
+    props: DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, any>,
+    ref: Ref<HTMLInputElement>,
+  ) => {
+    return (
+      <input
+        type="text"
+        className="h-full w-full flex-1 cursor-text px-3 py-4 text-base outline-none"
+        ref={ref}
+        {...props}
+      />
+    )
+  },
+)
 
 type IconProps = {
   icon: ElementType
@@ -36,7 +50,9 @@ type IconProps = {
 
 function TextInputLeftIcon({ icon: Icon, ...props }: IconProps) {
   return (
-    <Icon {...props} className="h-11 w-11 shrink-0 peer-focus-visible:text-primary-500" />
+    <span className="h-5 w-5">
+      <Icon {...props} className="peer-focus-visible:text-primary-500" />
+    </span>
   )
 }
 

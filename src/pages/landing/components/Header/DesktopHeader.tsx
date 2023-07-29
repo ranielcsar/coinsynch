@@ -9,7 +9,9 @@ export function DesktopHeader() {
   return (
     <header className="pt-5 shadow-md">
       <section className="m-auto grid max-w-[90rem] grid-cols-[1fr,max-content,1fr,25rem,1.2fr] items-center gap-10 px-16 pb-5">
-        <CoinSynchLogo />
+        <div className="h-8 w-36">
+          <CoinSynchLogo />
+        </div>
 
         <div className="col-[2] flex gap-5">
           <a href="#about">About us</a>
@@ -22,7 +24,9 @@ export function DesktopHeader() {
 
         <div className="col-[5] flex justify-end gap-5">
           <button onClick={openSignIn}>Sign in</button>
-          <Button onClick={openSignUp}>Sing up</Button>
+          <Button className="md:py-2" onClick={openSignUp}>
+            Sing up
+          </Button>
         </div>
       </section>
     </header>

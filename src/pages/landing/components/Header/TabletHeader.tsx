@@ -9,7 +9,9 @@ export function TabletHeader() {
   return (
     <header className="flex flex-col pt-5 shadow-md">
       <section className="grid grid-cols-[1fr,1fr,1.2fr,1fr] items-center px-6 pb-5">
-        <CoinSynchLogo />
+        <div className="h-8 w-32">
+          <CoinSynchLogo />
+        </div>
 
         <div className="col-[2] flex gap-5">
           <a href="#about">About us</a>

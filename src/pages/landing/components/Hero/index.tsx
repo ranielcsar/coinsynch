@@ -9,13 +9,13 @@ import Banner1 from '@/assets/images/banner-image-1.svg'
 import Banner2 from '@/assets/images/banner-image-2.svg'
 import Banner3 from '@/assets/images/banner-image-3.svg'
 import { Button, Tag } from '@/components'
-import { useMediaQuery } from '@/hooks/useMediaQuery'
+import { useBreakpoints } from '@/hooks/useBreakpoints'
 
 import { useModal } from '../../hooks/useModal'
 
 export function Hero() {
   const { openSignUp } = useModal()
-  const isDesktop = useMediaQuery('(min-width: 1280px)')
+  const { isDesktop } = useBreakpoints()
 
   return (
     <>
@@ -69,7 +69,7 @@ const bannerImages = [
 
 function ImagesCarousel() {
   const [activeItem, setActiveItem] = useState(bannerImages[0].id)
-  const isDesktop = useMediaQuery('(min-width: 1280px)')
+  const { isDesktop } = useBreakpoints()
 
   const { carouselFragment, useListenToCustomEvent, slideToNextItem } = useSpringCarousel(
     {

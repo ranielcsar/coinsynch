@@ -4,13 +4,13 @@ import Image from 'next/image'
 import { CryptosTable } from '@/components'
 import { Button } from '@/components'
 import { CryptoCurrency, useCryptoCurrencies } from '@/hooks/api/useCryptoCurrencies'
-import { useMediaQuery } from '@/hooks/useMediaQuery'
+import { useBreakpoints } from '@/hooks/useBreakpoints'
 import { formatPriceInDollar } from '@/utils/formatPriceInDollar'
 
 import { MobileCryptos } from './Mobile'
 
 export function TopCryptos() {
-  const isTablet = useMediaQuery('(min-width: 760px)')
+  const { isTablet, isDesktop } = useBreakpoints()
   const { cryptoCurrencies, loadingCrypto } = useCryptoCurrencies()
 
   const actions = columnHelper.display({
@@ -33,7 +33,7 @@ export function TopCryptos() {
       <h5 className="mb-4 pt-8 text-center font-bold">Top Cryptos</h5>
 
       <div className="my-5 w-full max-w-screen-xl md:m-auto">
-        {isTablet ? (
+        {isTablet || isDesktop ? (
           <CryptosTable
             data={cryptoCurrencies}
             columns={[...columns, actions]}
@@ -79,22 +79,22 @@ const columns = [
   }),
   columnHelper.accessor((row) => row.priceUsd, {
     id: 'priceUsd',
-    cell: (info) => formatPriceInDollar(Number(info.getValue())),
     header: () => <span>Price</span>,
+    cell: (info) => formatPriceInDollar(Number(info.getValue())),
   }),
   columnHelper.accessor((row) => row.changePercent24Hr, {
     id: 'changePercent',
+    header: () => <span>Change</span>,
     cell: (info) => {
       const value = Number(info.getValue()).toFixed(2) || 0
       const isNegative = Number(value) < 0
 
       return (
-        <p className={isNegative ? 'text-quartenary-500' : 'text-tertiary-500'}>
+        <p className={isNegative ? 'text-quartenary-700' : 'text-tertiary-700'}>
           {isNegative ? '' : '+'}
           {value.toString().replace('.', ',')}%
         </p>
       )
     },
-    header: () => <span>Change</span>,
   }),
 ]

@@ -3,7 +3,7 @@ import { useEffect } from 'react'
 import { useSpringCarousel } from 'react-spring-carousel'
 
 import { CryptoCurrency, useCryptoCurrencies } from '@/hooks/api/useCryptoCurrencies'
-import { useMediaQuery } from '@/hooks/useMediaQuery'
+import { useBreakpoints } from '@/hooks/useBreakpoints'
 import { formatPriceInDollar } from '@/utils/formatPriceInDollar'
 
 export function CryptosCarousel() {
@@ -22,8 +22,7 @@ export function CryptosCarousel() {
 }
 
 function Carousel({ cryptos }: { cryptos: CryptoCurrency[] }) {
-  const isDesktop = useMediaQuery('(min-width: 1280px)')
-  const isTablet = useMediaQuery('(min-width: 768px) and (max-width: 1280px)')
+  const { isDesktop, isTablet } = useBreakpoints()
   let itemsPerSlide = 1.2
 
   if (isDesktop) itemsPerSlide = 1.5
@@ -40,7 +39,7 @@ function Carousel({ cryptos }: { cryptos: CryptoCurrency[] }) {
           <div key={crypto.id} className="mr-8 flex w-max gap-2">
             <span>{crypto.symbol}</span>
             <span>{formatPriceInDollar(Number(crypto.priceUsd))}</span>
-            <span className={isNegative ? 'text-quartenary-500' : 'text-tertiary-500'}>
+            <span className={isNegative ? 'text-quartenary-700' : 'text-tertiary-700'}>
               {isNegative ? '' : '+'}
               {percentValue}%
             </span>

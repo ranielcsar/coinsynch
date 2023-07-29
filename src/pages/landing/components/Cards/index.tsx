@@ -1,12 +1,12 @@
-import { useMediaQuery } from '@/hooks/useMediaQuery'
+import { useBreakpoints } from '@/hooks/useBreakpoints'
 
 import { CardsGrid } from './CardsGrid'
 import { MobileCards } from './MobileCards'
 
 export function Cards() {
-  const isTablet = useMediaQuery('(min-width: 768px)')
+  const { isTablet, isDesktop } = useBreakpoints()
 
-  if (isTablet) {
+  if (isTablet || isDesktop) {
     return <CardsGrid />
   }
 

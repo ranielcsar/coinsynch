@@ -1,6 +1,6 @@
 import { useSpringCarousel } from 'react-spring-carousel'
 
-import { BitconIcon, BusinessChartIcon, ComputerIcon, CurrencyIcon } from '@/assets/cards'
+import { BitconIcon, BusinessChartIcon, ComputerIcon, CurrencyIcon } from '@/assets/icons'
 
 import { Card } from './Card'
 

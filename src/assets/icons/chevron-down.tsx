@@ -4,8 +4,8 @@ export function ChevronDownIcon(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="16"
-      height="16"
+      width="100%"
+      height="100%"
       strokeWidth={2}
       stroke="currentColor"
       className="bi bi-chevron-down"

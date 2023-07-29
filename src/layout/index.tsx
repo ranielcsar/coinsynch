@@ -33,10 +33,14 @@ export function Layout({ children }: PropsWithChildren<any>) {
 
 function Footer() {
   return (
-    <footer className="flex w-full max-w-screen-xl justify-center bg-white py-5 md:m-auto md:justify-between md:px-5 xl:px-0">
-      <p className="hidden md:block">Copyright © 2022 - All rights reserved</p>
+    <footer className="w-full bg-white py-3 shadow-[0_2px_8px_2px_rgba(0,0,0,0.25)] md:m-auto md:justify-between md:px-5 xl:px-0">
+      <div className="flex max-w-screen-xl items-center justify-center md:justify-between xl:m-auto">
+        <p className="hidden md:block">Copyright © 2022 - All rights reserved</p>
 
-      <CoinSynchLogo />
+        <div className="h-12 w-32">
+          <CoinSynchLogo />
+        </div>
+      </div>
     </footer>
   )
 }

@@ -9,9 +9,10 @@ type DrawerProps = {
   isOpen: boolean
   onClose(): void
   children: ReactNode
+  direction?: 'right' | 'left'
 }
 
-export function Drawer({ isOpen, onClose, children }: DrawerProps) {
+export function Drawer({ isOpen, onClose, children, direction = 'right' }: DrawerProps) {
   return (
     <Transition.Root show={isOpen} as={Fragment}>
       <Dialog as="div" className="relative z-10" onClose={onClose}>
@@ -29,15 +30,19 @@ export function Drawer({ isOpen, onClose, children }: DrawerProps) {
 
         <div className="fixed inset-0 overflow-hidden">
           <div className="absolute inset-0 overflow-hidden">
-            <div className="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10">
+            <div
+              className={`pointer-events-none fixed inset-y-0 right-0 flex max-w-full ${
+                direction === 'left' ? 'pr-10' : 'pl-10'
+              }`}
+            >
               <Transition.Child
                 as={Fragment}
                 enter="transform transition ease-in-out duration-500 sm:duration-700"
-                enterFrom="translate-x-full"
-                enterTo="translate-x-0"
+                enterFrom={`${direction === 'left' ? '-' : ''}translate-x-full`}
+                enterTo={`${direction === 'left' ? '-' : ''}translate-x-0`}
                 leave="transform transition ease-in-out duration-500 sm:duration-700"
-                leaveFrom="translate-x-0"
-                leaveTo="translate-x-full"
+                leaveFrom={`${direction === 'left' ? '-' : ''}translate-x-0`}
+                leaveTo={`${direction === 'left' ? '-' : ''}translate-x-full`}
               >
                 <Dialog.Panel className="pointer-events-auto relative w-screen max-w-md">
                   <Transition.Child
@@ -52,7 +57,7 @@ export function Drawer({ isOpen, onClose, children }: DrawerProps) {
                     <div className="absolute right-0 top-0 flex pr-2 pt-4 sm:-ml-10 sm:pr-4">
                       <button
                         type="button"
-                        className="text-gray-300 rounded-md hover:text-white focus:outline-none focus:ring-2 focus:ring-white"
+                        className="h-6 w-6 rounded-md text-secondary-300 hover:text-white focus:outline-none focus:ring-2 focus:ring-white"
                         onClick={onClose}
                       >
                         <CloseIcon />

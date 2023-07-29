@@ -1,83 +1,68 @@
-import { Fragment, useState } from 'react'
+import React, { forwardRef, ForwardRefRenderFunction } from 'react'
 
-import { Listbox, Transition } from '@headlessui/react'
-import Image from 'next/image'
+import Select, {
+  components,
+  DropdownIndicatorProps,
+  OptionTypeBase,
+  Props as SelectProps,
+} from 'react-select'
 
 import { ChevronDownIcon } from '@/assets/icons'
 
-const people = [
-  { name: 'Wade Cooper', image: 'https://picsum.photos/100?random=1' },
-  { name: 'Arlene Mccoy', image: 'https://picsum.photos/100?random=2' },
-  { name: 'Devon Webb', image: 'https://picsum.photos/100?random=3' },
-  { name: 'Tom Cook', image: 'https://picsum.photos/100?random=4' },
-  { name: 'Tanya Fox', image: 'https://picsum.photos/100?random=5' },
-  { name: 'Hellen Schmidt', image: 'https://picsum.photos/100?random=6' },
-]
+interface SelectInputProps extends SelectProps<OptionTypeBase> {}
 
-export function SelectInput() {
-  const [selected, setSelected] = useState(people[0])
+const ReactSelectInput: ForwardRefRenderFunction<HTMLSelectElement, SelectInputProps> = (
+  { options, ...props },
+  ref,
+) => {
+  const DropdownIndicator = (dropdownProps: DropdownIndicatorProps) => {
+    const { isFocused } = dropdownProps
 
-  return (
-    <Listbox value={selected} onChange={setSelected}>
-      <div className="relative mt-1">
-        <Listbox.Button className="group relative w-full cursor-pointer rounded-lg border border-secondary-300 bg-white py-2 pl-3 pr-10 text-left focus:outline-none focus-visible:border-primary-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-primary-300 sm:text-sm">
-          <span className="flex items-center gap-3 truncate">
-            <Option image={selected.image} name={selected.name} />
-          </span>
-          <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2 text-secondary-300 group-hover:text-primary-500">
-            <ChevronDownIcon />
-          </span>
-        </Listbox.Button>
-        <Transition
-          as={Fragment}
-          leave="transition ease-in duration-100"
-          leaveFrom="opacity-100"
-          leaveTo="opacity-0"
+    return (
+      <components.DropdownIndicator {...dropdownProps}>
+        <span
+          className={`pointer-events-none absolute inset-y-3 right-0 flex h-6 w-6 items-center pr-2 ${
+            isFocused ? 'text-primary-500' : 'text-secondary-300'
+          }`}
         >
-          <Listbox.Options className="absolute mt-1 w-full overflow-auto rounded-md border border-secondary-300 bg-white py-1 text-base focus:outline-none sm:text-sm">
-            {people.map((person, personIdx) => (
-              <Listbox.Option
-                key={personIdx}
-                className={({ active }) =>
-                  `relative cursor-pointer select-none border-b border-secondary-300 py-3 pl-3 pr-4 ${
-                    active ? 'bg-primary-100 text-primary-500' : 'text-gray-900'
-                  }`
-                }
-                value={person}
-              >
-                {({ selected }) => (
-                  <Option image={person.image} name={person.name} selected={selected} />
-                )}
-              </Listbox.Option>
-            ))}
-          </Listbox.Options>
-        </Transition>
-      </div>
-    </Listbox>
-  )
-}
+          <ChevronDownIcon />
+        </span>
+      </components.DropdownIndicator>
+    )
+  }
 
-type OptionProps = {
-  image: string
-  name: string
-  selected?: boolean
-}
-
-function Option({ image, name, selected }: OptionProps) {
   return (
-    <span
-      className={`flex items-center gap-3 truncate ${
-        selected ? 'font-bold text-primary-500' : 'font-normal'
-      }`}
-    >
-      <Image
-        src={image}
-        alt={`Picture of ${name}`}
-        width={10}
-        height={10}
-        className="h-6 w-6 rounded-full bg-secondary-300"
-      />
-      {name}
-    </span>
+    <Select
+      ref={ref}
+      options={options}
+      {...props}
+      unstyled
+      components={{
+        DropdownIndicator,
+        ...props.components,
+      }}
+      styles={{
+        input: (base) => ({
+          ...base,
+          'input:focus': {
+            boxShadow: 'none',
+          },
+        }),
+      }}
+      classNames={{
+        control: ({ hasValue }) =>
+          `border-secondary-300 border rounded-lg ${
+            hasValue ? 'py-0' : 'py-[0.7rem]'
+          } bg-white hover:cursor-pointer`,
+        placeholder: () => 'text-secondary-500 pl-2',
+        input: () => 'pl-1',
+        singleValue: () => 'leading-7',
+        valueContainer: () => '!flex w-full pl-1',
+        menu: () => 'p-2 mt-2 border border-secondary-300 bg-white rounded-lg',
+        option: () => 'p-2 border-b-secondary-300',
+      }}
+    />
   )
 }
+
+export const SelectInput = forwardRef(ReactSelectInput)

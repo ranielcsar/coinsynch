@@ -14,10 +14,12 @@ export function MobileHeader() {
 
   return (
     <header className="flex flex-col pt-5 shadow-md">
-      <section className="flex items-center justify-between px-4 pb-5">
-        <CoinSynchLogo />
+      <section className="flex items-center justify-between pb-5 pl-4">
+        <div className="h-8 w-36">
+          <CoinSynchLogo />
+        </div>
 
-        <button onClick={openDrawer}>
+        <button onClick={openDrawer} className="h-8 w-20">
           <MenuIcon />
         </button>
 
@@ -33,7 +35,7 @@ export function MobileHeader() {
               Sing up
             </Button>
 
-            <span className="absolute bottom-3">
+            <span className="absolute bottom-3 h-8 w-36">
               <CoinSynchLogo />
             </span>
           </Drawer.Content>

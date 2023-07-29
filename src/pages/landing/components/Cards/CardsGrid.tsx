@@ -1,4 +1,4 @@
-import { BitconIcon, BusinessChartIcon, ComputerIcon, CurrencyIcon } from '@/assets/cards'
+import { BitconIcon, BusinessChartIcon, ComputerIcon, CurrencyIcon } from '@/assets/icons'
 import { Button } from '@/components'
 
 import { useModal } from '../../hooks/useModal'

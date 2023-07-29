@@ -28,8 +28,8 @@ export function DesktopWaveSvg() {
           y2="224"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#FBAB34" stop-opacity="0.2" />
-          <stop offset="1" stop-color="#FBAB34" stop-opacity="0" />
+          <stop stopColor="#FBAB34" stopOpacity="0.2" />
+          <stop offset="1" stopColor="#FBAB34" stopOpacity="0" />
         </linearGradient>
         <linearGradient
           id="paint1_linear_1_1824"
@@ -39,8 +39,8 @@ export function DesktopWaveSvg() {
           y2="245.346"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#FBAB34" stop-opacity="0.2" />
-          <stop offset="1" stop-color="#FBAB34" stop-opacity="0" />
+          <stop stopColor="#FBAB34" stopOpacity="0.2" />
+          <stop offset="1" stopColor="#FBAB34" stopOpacity="0" />
         </linearGradient>
         <linearGradient
           id="paint2_linear_1_1824"
@@ -50,8 +50,8 @@ export function DesktopWaveSvg() {
           y2="212.346"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#FBAB34" stop-opacity="0.2" />
-          <stop offset="1" stop-color="#FBAB34" stop-opacity="0" />
+          <stop stopColor="#FBAB34" stopOpacity="0.2" />
+          <stop offset="1" stopColor="#FBAB34" stopOpacity="0" />
         </linearGradient>
       </defs>
     </svg>
