@@ -8,6 +8,7 @@ export type CryptoCurrency = {
   symbol: string
   priceUsd: string
   changePercent24Hr: string
+  holdings?: number
 }
 
 async function getCryptoCurrencies(limit: number) {

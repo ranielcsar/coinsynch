@@ -1,73 +1,78 @@
-import { useState } from 'react'
+import {
+  DetailedHTMLProps,
+  forwardRef,
+  InputHTMLAttributes,
+  useEffect,
+  useState,
+} from 'react'
 
-import CurrencyInputField, {
-  CurrencyInputProps as ReactCurrencyInputProps,
-} from 'react-currency-input-field'
 import { twMerge } from 'tailwind-merge'
 
 import { ChevronDownIcon } from '@/assets/icons'
 
-type CurrencyInputProps = {
-  onValueChange(value: number): void
-} & ReactCurrencyInputProps
+type InputProps = {
+  setValue?: any
+} & DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, any>
 
-export function CurrencyInput({
-  onValueChange,
-  className = '',
-  ...props
-}: CurrencyInputProps) {
-  const [value, setValue] = useState<string | undefined>()
+// eslint-disable-next-line react/display-name
+export const CurrencyInput = forwardRef<HTMLInputElement, InputProps>(
+  ({ className = '', setValue, ...props }, ref) => {
+    const [innerValue, setInnerValue] = useState(1)
 
-  const handleChange = (value: string | undefined) => {
-    if (!value) return
-    const floatValue = parseFloat(value.replace(',', '.'))
-    onValueChange(floatValue)
-    setValue(value)
-  }
+    const handleValueIncrement = () => {
+      const max = props.max as number
 
-  const handleValueIncrement = () => {
-    let floatValue = parseFloat((value as string).replace(',', '.'))
-    floatValue += 1
-    onValueChange(floatValue)
-    setValue(String(floatValue))
-  }
+      setInnerValue((value) => {
+        if (max && value >= max) {
+          return max
+        }
 
-  const handleValueDecrement = () => {
-    let floatValue = parseFloat((value as string).replace(',', '.'))
-    floatValue -= 1
-    onValueChange(floatValue)
-    setValue(String(floatValue))
-  }
+        return (value += 1)
+      })
+    }
 
-  return (
-    <div className="relative">
-      <CurrencyInputField
-        inputMode="numeric"
-        decimalsLimit={2}
-        allowDecimals
-        groupSeparator="."
-        decimalSeparator=","
-        decimalScale={2}
-        onValueChange={handleChange}
-        value={value}
-        className={twMerge(
-          'h-full w-full rounded-lg border border-secondary-300 bg-white p-3.5 pr-10 text-left outline-none sm:text-sm',
-          className,
-        )}
-        {...props}
-      />
-      <div className="absolute inset-y-0 right-0 ml-3 mt-0 flex h-full flex-col items-center justify-evenly pr-3">
-        <button
-          className="h-3 w-3 rotate-180 text-secondary-300"
-          onClick={handleValueIncrement}
-        >
-          <ChevronDownIcon />
-        </button>
+    const handleValueDecrement = () => {
+      setInnerValue((value) => {
+        if (value === 1) return 1
 
-        <button className="h-3 w-3 text-secondary-300" onClick={handleValueDecrement}>
-          <ChevronDownIcon />
-        </button>
+        return (value -= 1)
+      })
+    }
+
+    useEffect(() => {
+      if (setValue) setValue(props.name, innerValue)
+    }, [innerValue])
+
+    return (
+      <div className="relative">
+        <input
+          ref={ref}
+          type="number"
+          value={innerValue}
+          className={twMerge(
+            'h-full w-full rounded-lg border border-secondary-300 bg-white p-3.5 pr-10 text-left outline-none sm:text-sm',
+            className,
+          )}
+          {...props}
+        />
+        <div className="absolute inset-y-0 right-0 ml-3 mt-0 flex h-full flex-col items-center justify-evenly pr-3">
+          <button
+            type="button"
+            className="h-3 w-3 rotate-180 text-secondary-300"
+            onClick={handleValueIncrement}
+          >
+            <ChevronDownIcon />
+          </button>
+
+          <button
+            className="h-3 w-3 text-secondary-300"
+            onClick={handleValueDecrement}
+            type="button"
+          >
+            <ChevronDownIcon />
+          </button>
+        </div>
       </div>
-    </div>
-  )
-}
+    )
+  },
+)

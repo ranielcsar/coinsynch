@@ -1,43 +1,85 @@
+import Image from 'next/image'
+
 import { Button, Divider } from '@/components'
-import { CryptoCurrency } from '@/hooks/api/useCryptoCurrencies'
+import { CryptoCurrency, useCryptoCurrencies } from '@/hooks/api/useCryptoCurrencies'
+import { formatPriceInDollar } from '@/utils/formatPriceInDollar'
 
 type CryptosProp = {
   // eslint-disable-next-line no-unused-vars
   onTradeClick(crypto: CryptoCurrency): void
+  cryptos?: any[]
 }
 
-export function CryptosMobile({ onTradeClick }: CryptosProp) {
+export function CryptosMobile({ onTradeClick, cryptos = [] }: CryptosProp) {
+  const { cryptoCurrencies } = useCryptoCurrencies()
+
+  const myCryptos = cryptoCurrencies
+    ?.map((cryptoCurrency) => {
+      const existingCrypto = cryptos.find((crypto) => crypto.id === cryptoCurrency.id)
+
+      if (cryptoCurrency.id === existingCrypto?.id) {
+        const holdings = existingCrypto.holdings
+        const newCrypto = {
+          ...cryptoCurrency,
+          holdings,
+        }
+
+        return newCrypto
+      }
+
+      return null
+    })
+    .filter((crypto) => crypto)
+
   return (
-    <section className="mt-6 grid grid-cols-2 grid-rows-2 gap-3">
-      {Array.from({ length: 4 }).map((_, index) => (
-        <article key={index} className="min-h-[10vh] rounded-lg bg-white shadow-lg">
-          <div className="flex items-center justify-center gap-2 rounded-t-lg bg-primary-100 py-4">
-            <div className="h-6 w-6 rounded-full bg-secondary-300" />
-            <span>Bitcoin</span>
-            <span className="text-secondary-500">BTC</span>
-          </div>
+    <section className="mt-3 grid grid-cols-2 grid-rows-2 gap-4 p-4">
+      {myCryptos.map((crypto, index) => {
+        const changeValue = Number(crypto?.changePercent24Hr).toFixed(2) || 0
+        const isNegative = Number(changeValue) < 0
 
-          <div className="flex flex-col items-start p-3">
-            <span className="text-sm text-secondary-500">Holdings</span>
-            <p>US$ 25.499,52</p>
-            <span className="text-primary-400">434 ADA</span>
-          </div>
+        return (
+          <article key={index} className="min-h-[10vh] rounded-lg bg-white shadow-lg">
+            <div className="flex items-center justify-center gap-2 rounded-t-lg bg-primary-100 py-4">
+              <div className="flex gap-2">
+                <Image
+                  src={`https://cryptoicons.org/api/icon/${crypto?.symbol.toLocaleLowerCase()}/100`}
+                  width={30}
+                  height={30}
+                  alt={`${crypto?.name} icon`}
+                />
+                <span>{crypto?.name}</span>
+                <span className="text-secondary-500">{crypto?.symbol}</span>
+              </div>
+            </div>
 
-          <Divider className="mx-3" />
+            <div className="flex flex-col items-start p-3">
+              <span className="text-sm text-secondary-500">Holdings</span>
+              <p>{formatPriceInDollar(Number(crypto?.priceUsd))}</p>
 
-          <div className="flex flex-col items-start p-3">
-            <span className="text-sm text-secondary-500">Change</span>
-            <p className="text-quartenary-700">-5,65%</p>
-          </div>
+              <span className="text-primary-500">
+                {crypto?.holdings} {crypto?.symbol}
+              </span>
+            </div>
 
-          <Button
-            className="m-2 mb-3 w-[90%]"
-            onClick={() => onTradeClick({} as CryptoCurrency)}
-          >
-            Trade
-          </Button>
-        </article>
-      ))}
+            <Divider className="mx-3" />
+
+            <div className="flex flex-col items-start p-3">
+              <span className="text-sm text-secondary-500">Change</span>
+              <p className={isNegative ? 'text-quartenary-700' : 'text-tertiary-700'}>
+                {isNegative ? '' : '+'}
+                {changeValue.toString().replace('.', ',')}%
+              </p>
+            </div>
+
+            <Button
+              className="m-2 mb-3 w-[90%]"
+              onClick={() => onTradeClick(crypto as CryptoCurrency)}
+            >
+              Trade
+            </Button>
+          </article>
+        )
+      })}
     </section>
   )
 }

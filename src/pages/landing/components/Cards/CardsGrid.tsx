@@ -1,12 +1,12 @@
 import { BitconIcon, BusinessChartIcon, ComputerIcon, CurrencyIcon } from '@/assets/icons'
 import { Button } from '@/components'
 
-import { useModal } from '../../hooks/useModal'
+import { useOpenSignModal } from '../../hooks/useOpenSignModal'
 
 import { Card } from './Card'
 
 export function CardsGrid() {
-  const { openSignUp } = useModal()
+  const { openSignUp } = useOpenSignModal()
 
   return (
     <section className="m-auto mb-24 w-[85%] max-w-screen-xl xl:flex xl:w-full xl:gap-16">

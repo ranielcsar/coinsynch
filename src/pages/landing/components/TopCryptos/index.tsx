@@ -1,3 +1,5 @@
+import { useEffect, useMemo, useState } from 'react'
+
 import { createColumnHelper } from '@tanstack/react-table'
 import Image from 'next/image'
 
@@ -11,7 +13,13 @@ import { MobileCryptos } from './Mobile'
 
 export function TopCryptos() {
   const { isTablet, isDesktop } = useBreakpoints()
-  const { cryptoCurrencies, loadingCrypto } = useCryptoCurrencies()
+  const { cryptoCurrencies, loadingCrypto } = useCryptoCurrencies(15)
+
+  const [viewMore, setViewMore] = useState(false)
+
+  const filteredCurrencies = viewMore
+    ? cryptoCurrencies?.slice()
+    : cryptoCurrencies?.slice(0, 5)
 
   const actions = columnHelper.display({
     id: 'actions',
@@ -35,7 +43,7 @@ export function TopCryptos() {
       <div className="my-5 w-full max-w-screen-xl md:m-auto">
         {isTablet || isDesktop ? (
           <CryptosTable
-            data={cryptoCurrencies}
+            data={filteredCurrencies}
             columns={[...columns, actions]}
             loading={loadingCrypto}
           />
@@ -44,7 +52,12 @@ export function TopCryptos() {
         )}
       </div>
 
-      <button className="mx-auto my-8 w-max text-lg text-primary-500">View more +</button>
+      <button
+        className="mx-auto my-8 w-max text-lg text-primary-500"
+        onClick={() => setViewMore((view) => !view)}
+      >
+        {viewMore ? 'View less -' : 'View more +'}
+      </button>
     </section>
   )
 }

@@ -11,10 +11,10 @@ import Banner3 from '@/assets/images/banner-image-3.svg'
 import { Button, Tag } from '@/components'
 import { useBreakpoints } from '@/hooks/useBreakpoints'
 
-import { useModal } from '../../hooks/useModal'
+import { useOpenSignModal } from '../../hooks/useOpenSignModal'
 
 export function Hero() {
-  const { openSignUp } = useModal()
+  const { openSignUp } = useOpenSignModal()
   const { isDesktop } = useBreakpoints()
 
   return (

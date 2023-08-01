@@ -25,24 +25,28 @@ export function Drawer({ isOpen, onClose, children, direction = 'right' }: Drawe
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <div className="bg-gray-500 fixed inset-0 bg-opacity-75 transition-opacity" />
+          <div className="fixed inset-0 bg-secondary-600 bg-opacity-75 transition-opacity" />
         </Transition.Child>
 
         <div className="fixed inset-0 overflow-hidden">
           <div className="absolute inset-0 overflow-hidden">
             <div
-              className={`pointer-events-none fixed inset-y-0 right-0 flex max-w-full ${
-                direction === 'left' ? 'pr-10' : 'pl-10'
-              }`}
+              className={`pointer-events-none fixed inset-y-0 ${
+                direction === 'left' ? 'left-0' : 'right-0'
+              } flex max-w-full ${direction === 'left' ? 'pr-10' : 'pl-10'}`}
             >
               <Transition.Child
                 as={Fragment}
                 enter="transform transition ease-in-out duration-500 sm:duration-700"
-                enterFrom={`${direction === 'left' ? '-' : ''}translate-x-full`}
-                enterTo={`${direction === 'left' ? '-' : ''}translate-x-0`}
+                enterFrom={`${
+                  direction === 'left' ? '-translate-x-full' : 'translate-x-full'
+                }`}
+                enterTo={`${direction === 'left' ? 'translate-x-0' : '-translate-x-0'}`}
                 leave="transform transition ease-in-out duration-500 sm:duration-700"
-                leaveFrom={`${direction === 'left' ? '-' : ''}translate-x-0`}
-                leaveTo={`${direction === 'left' ? '-' : ''}translate-x-full`}
+                leaveFrom={`${direction === 'left' ? 'translate-x-0' : '-translate-x-0'}`}
+                leaveTo={`${
+                  direction === 'left' ? '-translate-x-full' : 'translate-x-full'
+                }`}
               >
                 <Dialog.Panel className="pointer-events-auto relative w-screen max-w-md">
                   <Transition.Child
@@ -64,7 +68,7 @@ export function Drawer({ isOpen, onClose, children, direction = 'right' }: Drawe
                       </button>
                     </div>
                   </Transition.Child>
-                  <div className="flex h-full flex-col overflow-y-scroll bg-white py-6 shadow-xl">
+                  <div className="flex h-full flex-col overflow-y-auto bg-white py-6 shadow-xl">
                     {children}
                   </div>
                 </Dialog.Panel>

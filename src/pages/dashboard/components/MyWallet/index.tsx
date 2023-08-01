@@ -1,23 +1,28 @@
 import { useState } from 'react'
 
 import { BitcoinWalletIcon, PlusIcon } from '@/assets/icons'
-import { Button, Divider } from '@/components'
+import { Button } from '@/components'
 import { AddCrypto } from '@/components/Forms/AddCrypto'
 import { TransferCrypto } from '@/components/Forms/TransferCrypto'
 import { CryptoCurrency } from '@/hooks/api/useCryptoCurrencies'
 import { useBreakpoints } from '@/hooks/useBreakpoints'
+import { useAuth } from '@/pages/authContext'
 
 import { Cryptos } from './Cryptos'
 import { CryptosMobile } from './CryptosMobile'
+import { EmptyWallet } from './EmptyWallet'
 
 export function MyWallet() {
   const [addWalletModalOpen, setAddWalletModalOpen] = useState(false)
   const [selectedCrypto, setSelectedCrypto] = useState<CryptoCurrency | null>(null)
   const { isTablet, isDesktop } = useBreakpoints()
+  const { user } = useAuth()
+
+  const wallet = user ? user.wallet : []
 
   return (
     <>
-      <section className="mx-4 my-8 max-w-screen-xl rounded-lg bg-white shadow-lg xl:m-auto">
+      <section className="mx-4 my-8 max-w-screen-xl rounded-lg bg-white shadow-lg xl:mx-auto">
         <header className="flex items-center justify-between px-4 py-5 xl:m-auto">
           <div className="flex items-center">
             <span className="mr-[0.8rem] h-8 w-8 md:h-9 md:w-9">
@@ -39,12 +44,12 @@ export function MyWallet() {
           </Button>
         </header>
 
-        <Divider className="mx-0 mb-4 hidden w-full max-w-screen-xl bg-secondary-200 md:block xl:mx-auto" />
-
-        {isTablet || isDesktop ? (
-          <Cryptos onTradeClick={setSelectedCrypto} />
+        {wallet.length === 0 ? (
+          <EmptyWallet />
+        ) : isTablet || isDesktop ? (
+          <Cryptos onTradeClick={setSelectedCrypto} cryptos={wallet} />
         ) : (
-          <CryptosMobile onTradeClick={setSelectedCrypto} />
+          <CryptosMobile onTradeClick={setSelectedCrypto} cryptos={wallet} />
         )}
       </section>
 

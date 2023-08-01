@@ -1,5 +1,3 @@
-import { ReactNode, useState } from 'react'
-
 import { createColumnHelper } from '@tanstack/react-table'
 import Image from 'next/image'
 
@@ -11,10 +9,29 @@ import { formatPriceInDollar } from '@/utils/formatPriceInDollar'
 type CryptosProp = {
   // eslint-disable-next-line no-unused-vars
   onTradeClick(crypto: CryptoCurrency): void
+  cryptos?: any[]
 }
 
-export function Cryptos({ onTradeClick }: CryptosProp) {
-  const { cryptoCurrencies, loadingCrypto } = useCryptoCurrencies()
+export function Cryptos({ cryptos = [], onTradeClick }: CryptosProp) {
+  const { cryptoCurrencies } = useCryptoCurrencies(20)
+
+  const myCryptos = cryptoCurrencies
+    ?.map((cryptoCurrency) => {
+      const existingCrypto = cryptos.find((crypto) => crypto.id === cryptoCurrency.id)
+
+      if (cryptoCurrency.id === existingCrypto?.id) {
+        const holdings = existingCrypto.holdings
+        const newCrypto = {
+          ...cryptoCurrency,
+          holdings,
+        }
+
+        return newCrypto
+      }
+
+      return null
+    })
+    .filter((crypto) => crypto)
 
   const actions = columnHelper.display({
     id: 'actions',
@@ -27,7 +44,9 @@ export function Cryptos({ onTradeClick }: CryptosProp) {
         <Tooltip label="Transfer Crypto">
           <button
             data-tooltip-target="tooltip-default"
-            onClick={() => onTradeClick(cryptoCurrency)}
+            onClick={() => {
+              onTradeClick(cryptoCurrency)
+            }}
             className="h-7 w-7"
           >
             <TradeIcon />
@@ -39,16 +58,12 @@ export function Cryptos({ onTradeClick }: CryptosProp) {
 
   return (
     <div className="mb-5 flex min-h-[25vh] w-full max-w-screen-xl flex-col bg-white p-5 xl:m-auto">
-      <CryptosTable
-        data={cryptoCurrencies}
-        columns={[...columns, actions]}
-        loading={loadingCrypto}
-      />
+      <CryptosTable data={myCryptos as any} columns={[...columns, actions]} />
     </div>
   )
 }
 
-const columnHelper = createColumnHelper<CryptoCurrency>()
+const columnHelper = createColumnHelper<CryptoCurrency & { holdings: number }>()
 
 const columns = [
   columnHelper.display({
@@ -76,24 +91,30 @@ const columns = [
       )
     },
   }),
-  columnHelper.accessor(({ priceUsd, symbol }) => ({ priceUsd, symbol }), {
-    id: 'priceUsd',
-    header: () => <span>Holdings</span>,
-    cell: (info) => {
-      const { priceUsd, symbol } = info.getValue()
-      const holding = Math.floor(Math.random() * 100)
+  columnHelper.accessor(
+    ({ priceUsd, symbol, holdings }) => ({
+      priceUsd,
+      symbol,
+      holdings,
+    }),
+    {
+      id: 'priceUsd',
+      header: () => <span>Holdings</span>,
+      cell: (info) => {
+        const { priceUsd, symbol, holdings } = info.getValue()
 
-      return (
-        <div className="flex flex-col text-sm">
-          <p>{formatPriceInDollar(Number(priceUsd))}</p>
+        return (
+          <div className="flex flex-col text-sm">
+            <p>{formatPriceInDollar(Number(priceUsd))}</p>
 
-          <span className="text-primary-500">
-            {holding} {symbol}
-          </span>
-        </div>
-      )
+            <span className="text-primary-500">
+              {holdings} {symbol}
+            </span>
+          </div>
+        )
+      },
     },
-  }),
+  ),
   columnHelper.accessor((row) => row.changePercent24Hr, {
     id: 'changePercent',
     header: () => <span>Change</span>,

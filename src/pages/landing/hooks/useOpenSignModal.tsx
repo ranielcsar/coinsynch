@@ -1,6 +1,6 @@
 import { useLandingContext } from '../context'
 
-export function useModal() {
+export function useOpenSignModal() {
   const { setSignInModalOpen, setSignUpModalOpen } = useLandingContext()
 
   const openSignIn = () => setSignInModalOpen(true)

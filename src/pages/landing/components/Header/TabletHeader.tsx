@@ -1,10 +1,10 @@
 import { CoinSynchLogo } from '@/assets/icons'
 import { Button, CryptosCarousel } from '@/components'
 
-import { useModal } from '../../hooks/useModal'
+import { useOpenSignModal } from '../../hooks/useOpenSignModal'
 
 export function TabletHeader() {
-  const { openSignIn, openSignUp } = useModal()
+  const { openSignIn, openSignUp } = useOpenSignModal()
 
   return (
     <header className="flex flex-col pt-5 shadow-md">

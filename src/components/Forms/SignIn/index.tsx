@@ -1,9 +1,14 @@
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useRouter } from 'next/router'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
 import { EmailIcon } from '@/assets/icons'
 import { Button, CoinSynch, Modal, PasswordInput, TextInput } from '@/components'
+import { useToast } from '@/hooks/useToast'
+import { useAuth } from '@/pages/authContext'
+import { useOpenSignModal } from '@/pages/landing/hooks/useOpenSignModal'
+import { login } from '@/services/user'
 
 type SignInProps = {
   isOpen: boolean
@@ -18,21 +23,41 @@ const signInSchema = z.object({
 type SignInForm = z.infer<typeof signInSchema>
 
 export function SignIn({ isOpen, onClose }: SignInProps) {
+  const { toast } = useToast()
+  const router = useRouter()
   const {
     register,
     formState: { errors },
     handleSubmit,
     reset,
+    clearErrors,
   } = useForm<SignInForm>({
     resolver: zodResolver(signInSchema),
   })
   const hasErrors = Object.keys(errors).length !== 0
+  const { setUser } = useAuth()
+  const { openSignUp } = useOpenSignModal()
 
-  const handleSingIn = (data: SignInForm) => console.log({ data })
+  const handleSingIn = async (data: SignInForm) => {
+    try {
+      const user = login({ email: data.email, password: data.password })
+      setUser(user)
+      toast('Logged', { type: 'success' })
+      router.push('/dashboard')
+    } catch (error: any) {
+      toast(error.message, { type: 'error' })
+    }
+  }
 
   const handleClose = () => {
     onClose()
     reset()
+    clearErrors()
+  }
+
+  const goToSignUp = () => {
+    handleClose()
+    openSignUp()
   }
 
   return (
@@ -42,8 +67,8 @@ export function SignIn({ isOpen, onClose }: SignInProps) {
       </Modal.Title>
 
       <form onSubmit={handleSubmit(handleSingIn)}>
-        <Modal.Body className="my-6 grid grid-rows-[repeat(2,3rem)] gap-6">
-          <TextInput>
+        <Modal.Body className="my-6 grid auto-rows-[max-content] gap-6">
+          <TextInput error={errors.email?.message}>
             <TextInput.LeftIcon icon={EmailIcon} />
             <TextInput.Input
               placeholder="Email"
@@ -52,7 +77,10 @@ export function SignIn({ isOpen, onClose }: SignInProps) {
             />
           </TextInput>
 
-          <PasswordInput {...register('password', { required: true })} />
+          <PasswordInput
+            error={errors.password?.message}
+            {...register('password', { required: true })}
+          />
         </Modal.Body>
 
         <Modal.Footer className="flex flex-col items-center gap-5 text-default_text">
@@ -64,10 +92,13 @@ export function SignIn({ isOpen, onClose }: SignInProps) {
             Sign in
           </Button>
 
-          <span className="flex cursor-pointer flex-wrap justify-center gap-1 text-center text-sm hover:border-b">
+          <button
+            onClick={goToSignUp}
+            className="flex cursor-pointer flex-wrap justify-center gap-1 text-center text-sm hover:border-b"
+          >
             Don’t have an account? <strong>Sign up to</strong>{' '}
             <CoinSynch className="text-sm" />
-          </span>
+          </button>
         </Modal.Footer>
       </form>
     </Modal>

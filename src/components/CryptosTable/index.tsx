@@ -7,7 +7,7 @@ import {
 
 type CryptosTableProps<T> = {
   columns: ColumnDef<T, any>[]
-  data: T[]
+  data?: T[]
   loading?: boolean
 }
 

@@ -2,11 +2,12 @@ import { useState } from 'react'
 
 import { SignIn, SignUp } from '@/components/Forms'
 import { useBreakpoints } from '@/hooks/useBreakpoints'
+import { Footer } from '@/layout/Footer'
 
 import { Cards } from './components/Cards'
 import { Header } from './components/Header'
 import { Hero } from './components/Hero'
-import { Subscribe } from './components/Subscribe'
+import { Newsletter } from './components/Newsletter'
 import { TopCryptos } from './components/TopCryptos'
 import { LandingContext } from './context'
 
@@ -34,7 +35,7 @@ export function LandingPage() {
       <SignUp isOpen={signUpModalOpen} onClose={() => setSignUpModalOpen(false)} />
       <SignIn isOpen={signInModalOpen} onClose={() => setSignInModalOpen(false)} />
 
-      <main>
+      <main className="relative min-h-screen">
         <Header />
 
         <Hero />
@@ -45,7 +46,9 @@ export function LandingPage() {
           <TopCryptos />
         </div>
 
-        <Subscribe />
+        <Newsletter />
+
+        <Footer />
       </main>
     </LandingContext>
   )
