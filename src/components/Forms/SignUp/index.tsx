@@ -9,7 +9,7 @@ import { Button, CoinSynch, Modal, PasswordInput, TextInput } from '@/components
 import { Checkbox } from '@/components/Checkbox'
 import { useToast } from '@/hooks/useToast'
 import { useOpenSignModal } from '@/pages/landing/hooks/useOpenSignModal'
-import { addNewUser } from '@/services/user'
+import { userApi } from '@/services/api'
 
 type SignUpProps = {
   isOpen: boolean
@@ -55,7 +55,8 @@ export function SignUp({ isOpen, onClose }: SignUpProps) {
         wallet: [],
       }
 
-      addNewUser(newUser)
+      await userApi.post('/users', newUser)
+
       toast('User cretead successfully', { type: 'success' })
       handleClose()
     } catch (err: any) {

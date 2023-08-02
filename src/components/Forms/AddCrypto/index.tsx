@@ -8,6 +8,7 @@ import { Button, CurrencyInput, InputError, Modal, SelectInput } from '@/compone
 import { useCryptoCurrencies } from '@/hooks/api/useCryptoCurrencies'
 import { useToast } from '@/hooks/useToast'
 import { useAuth } from '@/pages/authContext'
+import { userApi } from '@/services/api'
 import { saveLoggedUser } from '@/services/user'
 
 type AddCryptoProps = {
@@ -72,6 +73,8 @@ export function AddCrypto({ isOpen, onClose }: AddCryptoProps) {
           ...user,
           wallet: newWallet,
         }
+
+        await userApi.patch(`/users/${user.id}`, { wallet: newWallet })
 
         setUser(newUser)
         saveLoggedUser(newUser)

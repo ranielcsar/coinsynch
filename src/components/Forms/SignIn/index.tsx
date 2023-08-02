@@ -8,7 +8,8 @@ import { Button, CoinSynch, Modal, PasswordInput, TextInput } from '@/components
 import { useToast } from '@/hooks/useToast'
 import { useAuth } from '@/pages/authContext'
 import { useOpenSignModal } from '@/pages/landing/hooks/useOpenSignModal'
-import { login } from '@/services/user'
+import { userApi } from '@/services/api'
+import { saveLoggedUser } from '@/services/user'
 
 type SignInProps = {
   isOpen: boolean
@@ -40,8 +41,14 @@ export function SignIn({ isOpen, onClose }: SignInProps) {
 
   const handleSingIn = async (data: SignInForm) => {
     try {
-      const user = login({ email: data.email, password: data.password })
+      const response = await userApi.get('/users', {
+        params: { email: data.email, password: data.password },
+      })
+
+      const user = response.data[0]
       setUser(user)
+      saveLoggedUser(user)
+
       toast('Logged', { type: 'success' })
       router.push('/dashboard')
     } catch (error: any) {
