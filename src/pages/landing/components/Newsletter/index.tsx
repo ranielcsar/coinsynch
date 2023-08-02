@@ -3,12 +3,13 @@ import { FormEvent, useEffect, useState } from 'react'
 import { SubscribeBg } from '@/assets/bg-svgs/subscribeBg'
 import { Button, TextInput } from '@/components'
 import { useToast } from '@/hooks/useToast'
+import { userApi } from '@/services/api'
 
 export function Newsletter() {
   const [subscribeLoading, setSubscribeLoading] = useState(false)
   const { toast } = useToast()
 
-  const handleSubscribe = (evt: FormEvent) => {
+  const handleSubscribe = async (evt: FormEvent) => {
     evt.preventDefault()
     const form = new FormData(evt.currentTarget as HTMLFormElement)
     const email = form.get('subscribe_email')
@@ -19,6 +20,7 @@ export function Newsletter() {
     }
 
     setSubscribeLoading(true)
+    await userApi.post('/newsletter_subscribe', { email })
   }
 
   useEffect(() => {
