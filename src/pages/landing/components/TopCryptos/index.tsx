@@ -14,12 +14,21 @@ import { MobileCryptos } from './Mobile'
 export function TopCryptos() {
   const { isTablet, isDesktop } = useBreakpoints()
   const { cryptoCurrencies, loadingCrypto } = useCryptoCurrencies(15)
+  const [filteredCurrencies, setFilteredCurrencies] = useState<CryptoCurrency[]>()
 
-  const [viewMore, setViewMore] = useState(false)
+  const [viewMore, setViewMore] = useState<boolean | null>(null)
 
-  const filteredCurrencies = viewMore
-    ? cryptoCurrencies?.slice()
-    : cryptoCurrencies?.slice(0, 5)
+  useEffect(() => {
+    if (!loadingCrypto) setFilteredCurrencies(cryptoCurrencies?.slice(0, 5))
+  }, [loadingCrypto])
+
+  useEffect(() => {
+    if (viewMore === null) return
+
+    if (viewMore) return setFilteredCurrencies(cryptoCurrencies)
+
+    return setFilteredCurrencies(cryptoCurrencies?.slice(0, 5))
+  }, [viewMore])
 
   const actions = columnHelper.display({
     id: 'actions',
