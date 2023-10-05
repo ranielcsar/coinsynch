@@ -8,7 +8,7 @@ import { Button, CurrencyInput, InputError, Modal, SelectInput } from '@/compone
 import { useCryptoCurrencies } from '@/hooks/api/useCryptoCurrencies'
 import { useToast } from '@/hooks/useToast'
 import { useAuth } from '@/pages/authContext'
-import { userApi } from '@/services/api'
+import { coinIcon, userApi } from '@/services/api'
 import { saveLoggedUser } from '@/services/user'
 
 type AddCryptoProps = {
@@ -96,7 +96,7 @@ export function AddCrypto({ isOpen, onClose }: AddCryptoProps) {
   const cryptoOptions = cryptoCurrencies?.map((crypto) => ({
     value: crypto.id,
     label: crypto.name,
-    image: `https://cryptoicons.org/api/icon/${crypto.symbol.toLocaleLowerCase()}/100`,
+    image: coinIcon(crypto.symbol.toLowerCase()),
   }))
 
   return (

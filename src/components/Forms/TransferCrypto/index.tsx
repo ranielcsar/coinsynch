@@ -9,6 +9,7 @@ import { Button, CurrencyInput, Divider, Modal, SelectInput } from '@/components
 import { CryptoCurrency } from '@/hooks/api/useCryptoCurrencies'
 import { useToast } from '@/hooks/useToast'
 import { useAuth } from '@/pages/authContext'
+import { coinIcon } from '@/services/api'
 import { saveLoggedUser } from '@/services/user'
 
 type TransferCryptoProps = {
@@ -126,7 +127,7 @@ export function TransferCrypto({ crypto, isOpen, onClose }: TransferCryptoProps)
 
         <div className="flex items-center gap-2">
           <Image
-            src={`https://cryptoicons.org/api/icon/${crypto?.symbol.toLocaleLowerCase()}/100`}
+            src={coinIcon(crypto?.symbol.toLowerCase())}
             width={30}
             height={30}
             alt={`${crypto?.name} icon`}
