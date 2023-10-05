@@ -1,48 +1,21 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+### Projeto do Desafio Frontend para vaga de Frontend na EduSynch, feito por Raniel César
 
-## Getting Started
+### Sobre
 
-First, install json-server as global:
+Aplicação que simula uma carteira de Cryptomoedas na qual o usuário poderá se registrar, logar, fazer logout,
+adicionar moedas em sua carteira, remover, vender e/ou trocar e também se inscrever na Newsletter.
 
-```bash
-npm install -g json-server
-# or
-yarn global add json-server
-# or
-pnpm add --global json-server
-```
+As informações sobre as Cryptomoedas vêm da API da CoinCap: https://coincap.io/
+Os ícones das Cryptomoedas vêm da CoinIcons API: https://coinicons-api.vercel.app/api
 
-Go to the project folder and install the dependencies with:
+### Principais funcionalidades
 
-```bash
-npm install
-# or
-yarn install (or just yarn)
-# or
-pnpm install
-```
-
-run the db.json with json-server:
-
-```bash
-json-server --watch src/data/db.json
-```
-
-and then run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
----
-
-### Projeto do Desafio Frontend para vaga de Frontend na EduSynch, feito por Raniel César (infelizmente não passei)
+- Cadastro (register)
+- Entrar (login)
+- Sair (logout)
+- Se inscrever na Newsletter (subscribe)
+- Adicionar cryptomoeda na carteira
+- Transferência de entrada/saída de cryptomoedas da carteira
 
 #### Tecnologias:
 
@@ -56,3 +29,45 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 - Zod
 - Tanstack Table
 - JSON Server
+
+## Como rodar o projeto
+
+Primeiro, instale o `json-server` localmente com:
+
+```bash
+npm install -g json-server
+# or
+yarn global add json-server
+# or
+pnpm add --global json-server
+```
+
+Ao installar o `json-server`, vá para a pasta do projeto e instale as dependências com:
+
+```bash
+npm install
+# or
+yarn install (or just yarn)
+# or
+pnpm install
+```
+
+Execute o `db.json` com o `json-server`:
+
+```bash
+json-server --watch src/data/db.json
+```
+
+e por fim execute a aplicação com:
+
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+```
+
+Abra [http://localhost:3000](http://localhost:3000) para ver o resultado no seu navegador.
+
+---
