@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ['cryptoicons.org'],
+    domains: ['coinicons-api.vercel.app'],
   },
 }
 
