@@ -1,4 +1,4 @@
-### Projeto do Desafio Frontend para vaga de Frontend na EduSynch, feito por Raniel César
+## Projeto do Desafio Frontend para vaga de Frontend na EduSynch, feito por Raniel César
 
 ### Sobre
 
