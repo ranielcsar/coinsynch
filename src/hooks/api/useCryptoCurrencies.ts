@@ -22,10 +22,9 @@ async function getCryptoCurrencies(limit: number) {
 }
 
 export function useCryptoCurrencies(limit = 5) {
-  const { isLoading, data } = useQuery(
-    ['crypto_currencies'],
-    () => getCryptoCurrencies(limit),
+  const { isFetching, data } = useQuery(['crypto_currencies', limit], () =>
+    getCryptoCurrencies(limit),
   )
 
-  return { loadingCrypto: isLoading, cryptoCurrencies: data as CryptoCurrency[] }
+  return { loadingCrypto: isFetching, cryptoCurrencies: data as CryptoCurrency[] }
 }
