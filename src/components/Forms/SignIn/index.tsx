@@ -101,7 +101,8 @@ export function SignIn({ isOpen, onClose }: SignInProps) {
 
           <button
             onClick={goToSignUp}
-            className="flex cursor-pointer flex-wrap justify-center gap-1 text-center text-sm hover:border-b"
+            type="button"
+            className="flex h-max cursor-pointer flex-wrap justify-center gap-1 pb-1 text-center text-sm hover:underline hover:underline-offset-2"
           >
             Don’t have an account? <strong>Sign up to</strong>{' '}
             <CoinSynch className="text-sm" />
