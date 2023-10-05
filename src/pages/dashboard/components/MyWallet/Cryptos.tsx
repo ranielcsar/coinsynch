@@ -5,6 +5,7 @@ import { TradeIcon } from '@/assets/icons'
 import { CryptosTable, Tooltip } from '@/components'
 import { CryptoCurrency, useCryptoCurrencies } from '@/hooks/api/useCryptoCurrencies'
 import { formatPriceInDollar } from '@/utils/formatPriceInDollar'
+import { coinIcon } from '@/services/api'
 
 type CryptosProp = {
   // eslint-disable-next-line no-unused-vars
@@ -80,7 +81,7 @@ const columns = [
       return (
         <div className="flex gap-2">
           <Image
-            src={`https://cryptoicons.org/api/icon/${symbol.toLocaleLowerCase()}/100`}
+            src={coinIcon(symbol.toLowerCase())}
             width={30}
             height={30}
             alt={`${name} icon`}

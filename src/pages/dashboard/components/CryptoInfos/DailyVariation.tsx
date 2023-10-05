@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import Image from 'next/image'
 
 import { CryptoCurrency } from '@/hooks/api/useCryptoCurrencies'
+import { coinIcon } from '@/services/api'
 
 export function DailyVariation({ cryptos }: { cryptos?: CryptoCurrency[] }) {
   const [currentCurrency, setCurrentCurrency] = useState(0)
@@ -39,7 +40,7 @@ export function DailyVariation({ cryptos }: { cryptos?: CryptoCurrency[] }) {
         <div className="flex w-full items-center justify-between gap-2 px-1 md:flex-col lg:w-[7.5rem] lg:items-start lg:px-2">
           <div className="flex items-center gap-2">
             <Image
-              src={`https://cryptoicons.org/api/icon/${actualCurrency?.symbol.toLocaleLowerCase()}/100`}
+              src={coinIcon(actualCurrency?.symbol)}
               width={25}
               height={25}
               alt={`${actualCurrency?.name} icon`}
