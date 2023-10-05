@@ -2,15 +2,14 @@ import { Disclosure } from '@headlessui/react'
 import Image from 'next/image'
 
 import { ChevronDownIcon } from '@/assets/icons'
-import { useCryptoCurrencies } from '@/hooks/api/useCryptoCurrencies'
+import { CryptoCurrency } from '@/hooks/api/useCryptoCurrencies'
+import { coinIcon } from '@/services/api'
 import { formatPriceInDollar } from '@/utils/formatPriceInDollar'
 
-export function MobileCryptos() {
-  const { cryptoCurrencies } = useCryptoCurrencies()
-
+export function MobileCryptos({ data }: { data?: CryptoCurrency[] }) {
   return (
     <>
-      {cryptoCurrencies?.map((crypto) => (
+      {data?.map((crypto) => (
         <Disclosure key={crypto.id}>
           {({ open }) => {
             const percentValue = Number(crypto.changePercent24Hr).toFixed(2) || 0
@@ -22,7 +21,7 @@ export function MobileCryptos() {
                   <div className="grid grid-cols-[1fr,1rem] items-center text-left">
                     <div className="flex items-center gap-2">
                       <Image
-                        src={`https://cryptoicons.org/api/icon/${crypto.symbol.toLocaleLowerCase()}/100`}
+                        src={coinIcon(crypto.symbol.toLowerCase())}
                         width={30}
                         height={30}
                         alt={`${crypto.name} icon`}
