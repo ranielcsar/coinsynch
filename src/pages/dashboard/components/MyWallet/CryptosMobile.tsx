@@ -2,6 +2,7 @@ import Image from 'next/image'
 
 import { Button, Divider } from '@/components'
 import { CryptoCurrency, useCryptoCurrencies } from '@/hooks/api/useCryptoCurrencies'
+import { coinIcon } from '@/services/api'
 import { formatPriceInDollar } from '@/utils/formatPriceInDollar'
 
 type CryptosProp = {
@@ -42,7 +43,7 @@ export function CryptosMobile({ onTradeClick, cryptos = [] }: CryptosProp) {
             <div className="flex items-center justify-center gap-2 rounded-t-lg bg-primary-100 py-4">
               <div className="flex gap-2">
                 <Image
-                  src={`https://cryptoicons.org/api/icon/${crypto?.symbol.toLocaleLowerCase()}/100`}
+                  src={coinIcon(crypto?.symbol.toLowerCase())}
                   width={30}
                   height={30}
                   alt={`${crypto?.name} icon`}

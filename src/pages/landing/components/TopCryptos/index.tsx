@@ -7,6 +7,7 @@ import { CryptosTable } from '@/components'
 import { Button } from '@/components'
 import { CryptoCurrency, useCryptoCurrencies } from '@/hooks/api/useCryptoCurrencies'
 import { useBreakpoints } from '@/hooks/useBreakpoints'
+import { coinIcon } from '@/services/api'
 import { formatPriceInDollar } from '@/utils/formatPriceInDollar'
 
 import { MobileCryptos } from './Mobile'
@@ -14,21 +15,10 @@ import { MobileCryptos } from './Mobile'
 export function TopCryptos() {
   const { isTablet, isDesktop } = useBreakpoints()
   const { cryptoCurrencies, loadingCrypto } = useCryptoCurrencies(15)
-  const [filteredCurrencies, setFilteredCurrencies] = useState<CryptoCurrency[]>()
 
-  const [viewMore, setViewMore] = useState<boolean | null>(null)
+  const [viewMore, setViewMore] = useState<boolean>(false)
 
-  useEffect(() => {
-    if (!loadingCrypto) setFilteredCurrencies(cryptoCurrencies?.slice(0, 5))
-  }, [loadingCrypto])
-
-  useEffect(() => {
-    if (viewMore === null) return
-
-    if (viewMore) return setFilteredCurrencies(cryptoCurrencies)
-
-    return setFilteredCurrencies(cryptoCurrencies?.slice(0, 5))
-  }, [viewMore])
+  const filteredCurrencies = viewMore ? cryptoCurrencies : cryptoCurrencies?.slice(0, 5)
 
   const actions = columnHelper.display({
     id: 'actions',
@@ -57,7 +47,7 @@ export function TopCryptos() {
             loading={loadingCrypto}
           />
         ) : (
-          <MobileCryptos />
+          <MobileCryptos data={filteredCurrencies} />
         )}
       </div>
 
@@ -88,7 +78,7 @@ const columns = [
       return (
         <div className="flex gap-2">
           <Image
-            src={`https://cryptoicons.org/api/icon/${symbol.toLocaleLowerCase()}/100`}
+            src={coinIcon(symbol.toLowerCase())}
             width={30}
             height={30}
             alt={`${name} icon`}
