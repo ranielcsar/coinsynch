@@ -5,8 +5,9 @@
 Aplicação que simula uma carteira de Cryptomoedas na qual o usuário poderá se registrar, logar, fazer logout,
 adicionar moedas em sua carteira, remover, vender e/ou trocar e também se inscrever na Newsletter.
 
-As informações sobre as Cryptomoedas vêm da API da CoinCap: https://coincap.io/
-Os ícones das Cryptomoedas vêm da CoinIcons API: https://coinicons-api.vercel.app/api
+- As informações sobre as Cryptomoedas vêm da API da CoinCap: https://coincap.io/
+- Os ícones das Cryptomoedas vêm da CoinIcons API: https://coinicons-api.vercel.app/api
+- Utilizo `json-sever` para simular uma RestAPI e salvar alguns dados localmente
 
 ### Principais funcionalidades
 
