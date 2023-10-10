@@ -3,12 +3,8 @@ import { useState } from 'react'
 import { SignIn, SignUp } from '@/components/Forms'
 import { useBreakpoints } from '@/hooks/useBreakpoints'
 import { Footer } from '@/layout/Footer'
+import { Cards, Header, Hero, Newsletter, TopCryptos } from '@/page-components/landing'
 
-import { Cards } from './components/Cards'
-import { Header } from './components/Header'
-import { Hero } from './components/Hero'
-import { Newsletter } from './components/Newsletter'
-import { TopCryptos } from './components/TopCryptos'
 import { LandingContext } from './context'
 
 export function LandingPage() {
