@@ -1,0 +1,25 @@
+name: build-test-deploy
+on: push
+jobs:
+  json-server:
+    runs-on: ubuntu-latest
+    steps:
+      - name: install server
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18.x'
+      - run: npm install -g json-server
+      - run: json-server --version
+  build:
+    needs: json-server
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout repo
+        uses: actions/checkout@v3
+      - name: use node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18.x'
+      - run: json-server --watch ../../src/data/db.json
+      - run: npm install
+      - run: npm run build
