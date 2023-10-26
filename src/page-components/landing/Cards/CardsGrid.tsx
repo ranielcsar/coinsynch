@@ -1,7 +1,6 @@
 import { BitconIcon, BusinessChartIcon, ComputerIcon, CurrencyIcon } from '@/assets/icons'
 import { Button } from '@/components'
-
-import { useOpenSignModal } from '../../hooks/useOpenSignModal'
+import { useOpenSignModal } from '@/pages/landing/hooks/useOpenSignModal'
 
 import { Card } from './Card'
 

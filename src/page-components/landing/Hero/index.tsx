@@ -10,8 +10,7 @@ import Banner2 from '@/assets/images/banner-image-2.svg'
 import Banner3 from '@/assets/images/banner-image-3.svg'
 import { Button, Tag } from '@/components'
 import { useBreakpoints } from '@/hooks/useBreakpoints'
-
-import { useOpenSignModal } from '../../hooks/useOpenSignModal'
+import { useOpenSignModal } from '@/pages/landing/hooks/useOpenSignModal'
 
 export function Hero() {
   const { openSignUp } = useOpenSignModal()
