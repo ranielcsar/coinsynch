@@ -26,5 +26,9 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - name: run server
-        uses: /usr/local/bin/json-server --watch src/data/db.json --port 3333 --cwd $GITHUB_WORKSPACE
+      - name: Checkout repo
+        uses: actions/checkout@v3
+      - name: Run JSON Server
+        run: |
+          cd '../../src'
+          json-server --watch data/db.json --port 3333
