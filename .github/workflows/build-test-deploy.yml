@@ -27,4 +27,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: run server
-      - run: json-server --watch db.json --port 3333
+        uses: /usr/local/bin/json-server --watch src/data/db.json --port 3333 --cwd $GITHUB_WORKSPACE
