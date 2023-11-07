@@ -1,0 +1,22 @@
+version: '3.3'
+services:
+  frontend:
+    container_name: coin_front_ranoob
+    build:
+      context: ./front
+      dockerfile: Dockerfile
+    image: noob/coin_front
+    ports:
+      - '3000:3000'
+    volumes:
+      - ./front:/app
+  server:
+    container_name: coin_server_ranoob
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    image: noob/coin_server
+    ports:
+      - '3001:3001'
+    volumes:
+      - ./server:/app
