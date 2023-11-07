@@ -4,7 +4,7 @@ import { Popover, Transition } from '@headlessui/react'
 import { useRouter } from 'next/router'
 
 import { ChevronDownIcon } from '@/assets/icons'
-import { useAuth } from '@/pages/authContext'
+import { useAuth } from '@/modules/authContext'
 import { logout } from '@/services/user'
 
 export function Logout() {

@@ -1,6 +1,6 @@
 import { Divider } from '@/components'
 import { Footer } from '@/layout/Footer'
-import { CryptoInfos, Header, MyWallet, Sidebar } from '@/page-components/dashboard'
+import { CryptoInfos, Header, MyWallet, Sidebar } from '@/modules/dashboard'
 
 export default function Dashboard() {
   return (

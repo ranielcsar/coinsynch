@@ -1,5 +1,5 @@
 import { CryptoCurrency, useCryptoCurrencies } from '@/hooks/api/useCryptoCurrencies'
-import { useAuth } from '@/pages/authContext'
+import { useAuth } from '@/modules/authContext'
 
 import { Balance } from './Balance'
 import { DailyVariation } from './DailyVariation'

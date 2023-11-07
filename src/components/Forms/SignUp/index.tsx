@@ -8,7 +8,7 @@ import { EmailIcon, PersonIcon } from '@/assets/icons'
 import { Button, CoinSynch, Modal, PasswordInput, TextInput } from '@/components'
 import { Checkbox } from '@/components/Checkbox'
 import { useToast } from '@/hooks/useToast'
-import { useOpenSignModal } from '@/pages/landing/hooks/useOpenSignModal'
+import { useOpenSignModal } from '@/modules/landing/hooks/useOpenSignModal'
 import { userApi } from '@/services/api'
 
 type SignUpProps = {

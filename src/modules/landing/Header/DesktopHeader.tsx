@@ -1,6 +1,6 @@
 import { CoinSynchLogo } from '@/assets/icons'
 import { Button, CryptosCarousel } from '@/components'
-import { useOpenSignModal } from '@/pages/landing/hooks/useOpenSignModal'
+import { useOpenSignModal } from '@/modules/landing/hooks/useOpenSignModal'
 
 export function DesktopHeader() {
   const { openSignIn, openSignUp } = useOpenSignModal()

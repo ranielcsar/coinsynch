@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 import Image from 'next/image'
 import { useSpringCarousel } from 'react-spring-carousel'
@@ -10,7 +10,7 @@ import Banner2 from '@/assets/images/banner-image-2.svg'
 import Banner3 from '@/assets/images/banner-image-3.svg'
 import { Button, Tag } from '@/components'
 import { useBreakpoints } from '@/hooks/useBreakpoints'
-import { useOpenSignModal } from '@/pages/landing/hooks/useOpenSignModal'
+import { useOpenSignModal } from '@/modules/landing/hooks/useOpenSignModal'
 
 export function Hero() {
   const { openSignUp } = useOpenSignModal()

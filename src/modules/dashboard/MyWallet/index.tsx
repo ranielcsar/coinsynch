@@ -6,7 +6,7 @@ import { AddCrypto } from '@/components/Forms/AddCrypto'
 import { TransferCrypto } from '@/components/Forms/TransferCrypto'
 import { CryptoCurrency } from '@/hooks/api/useCryptoCurrencies'
 import { useBreakpoints } from '@/hooks/useBreakpoints'
-import { useAuth } from '@/pages/authContext'
+import { useAuth } from '@/modules/authContext'
 
 import { Cryptos } from './Cryptos'
 import { CryptosMobile } from './CryptosMobile'

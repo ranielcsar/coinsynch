@@ -2,7 +2,7 @@ import { useState } from 'react'
 
 import { CoinSynchLogo, MenuIcon } from '@/assets/icons'
 import { Button, CryptosCarousel, Drawer } from '@/components'
-import { useOpenSignModal } from '@/pages/landing/hooks/useOpenSignModal'
+import { useOpenSignModal } from '@/modules/landing/hooks/useOpenSignModal'
 
 export function MobileHeader() {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false)

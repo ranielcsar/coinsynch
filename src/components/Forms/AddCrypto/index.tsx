@@ -7,7 +7,7 @@ import { z } from 'zod'
 import { Button, CurrencyInput, InputError, Modal, SelectInput } from '@/components'
 import { useCryptoCurrencies } from '@/hooks/api/useCryptoCurrencies'
 import { useToast } from '@/hooks/useToast'
-import { useAuth } from '@/pages/authContext'
+import { useAuth } from '@/modules/authContext'
 import { coinIcon, userApi } from '@/services/api'
 import { saveLoggedUser } from '@/services/user'
 
